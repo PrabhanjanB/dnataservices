@@ -6,33 +6,36 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.emirates.dnata.awbcreationservice.dto.AWBTariff;
+
 @Document(collection = "awbdata")
 public class AWB {
 
 	@Id
 	private String id;
-	public String awbPrefix;
-	public String awbNumber;
-	public String awbNature;
-	public String origin;
-	public String destination;
-	public int pieces;
-	public int weight;
-	public String awbStatus;
+	private String awbPrefix;
+	private String awbNumber;
+	private String awbNature;
+	private String origin;
+	private String destination;
+	private int pieces;
+	private double weight;
+	private String awbStatus;
 	@Field("flights")
-	public ArrayList<Flight> flights;
+	private ArrayList<Flight> flights;
 	@Field("agent")
-	public ArrayList<Agent> agent;
-	public String createDate;
-	public ArrayList<String> scc;
-
+	private ArrayList<Agent> agent;
+	private String createDate;
+	private ArrayList<String> scc;
+	private AWBTariff tariff;
+	
 	public AWB() {
 		super();
 	}
 
 	public AWB(String id, String awbPrefix, String awbNumber, String awbNature, String origin, String destination,
-			int pieces, int weight, String awbStatus, ArrayList<Flight> flights, ArrayList<Agent> agent,
-			String createDate, ArrayList<String> scc) {
+			int pieces, double weight, String awbStatus, ArrayList<Flight> flights, ArrayList<Agent> agent,
+			String createDate, ArrayList<String> scc, AWBTariff tariff) {
 		super();
 		this.id = id;
 		this.awbPrefix = awbPrefix;
@@ -47,7 +50,10 @@ public class AWB {
 		this.agent = agent;
 		this.createDate = createDate;
 		this.scc = scc;
+		this.tariff = tariff;
 	}
+
+
 
 	public String getId() {
 		return id;
@@ -105,11 +111,11 @@ public class AWB {
 		this.pieces = pieces;
 	}
 
-	public int getWeight() {
+	public double getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(double weight) {
 		this.weight = weight;
 	}
 
@@ -153,12 +159,21 @@ public class AWB {
 		this.scc = scc;
 	}
 
+	public AWBTariff getTariff() {
+		return tariff;
+	}
+
+	public void setTariff(AWBTariff tariff) {
+		this.tariff = tariff;
+	}
+
 	@Override
 	public String toString() {
 		return "AWB [id=" + id + ", awbPrefix=" + awbPrefix + ", awbNumber=" + awbNumber + ", awbNature=" + awbNature
 				+ ", origin=" + origin + ", destination=" + destination + ", pieces=" + pieces + ", weight=" + weight
 				+ ", awbStatus=" + awbStatus + ", flights=" + flights + ", agent=" + agent + ", createDate="
-				+ createDate + ", scc=" + scc + "]";
+				+ createDate + ", scc=" + scc + ", tariff=" + tariff + "]";
 	}
+
 
 }
